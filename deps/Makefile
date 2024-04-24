@@ -18,7 +18,8 @@ IS_CENTOS = $(if $(findstring Unknown, $(CENTOSVER)),false,true)
 #
 USEVALGRIND := $(shell echo $(USEVALGRIND))
 
-PROXYDEBUG := $(shell echo $(PROXYDEBUG))
+#PROXYDEBUG := $(shell echo $(PROXYDEBUG))
+PROXYDEBUG := 1
 ifeq ($(PROXYDEBUG),1)
 MYCFLAGS=-O0
 MYJEOPT=--enable-xmalloc --enable-prof --enable-fill --enable-debug
