@@ -93,8 +93,8 @@ libssl/openssl/libssl.a:
 #	cd libssl/openssl && patch crypto/asn1/a_time.c < ../a_time.c-multiplication-overflow.patch
 	cd libssl/openssl && sed -i 's:^$$config{build_type} = "release":$$config{build_type} = "debug":g' ./Configure && grep build_type Configure
 	cd libssl/openssl && ./config -d no-ssl3 no-tests
-	cd libssl/openssl && sed -i 's:^CFLAGS=*:CFLAGS=-Wall -O0 -g :g' Makefile && grep ^CFLAGS= Makefile
-	cd libssl/openssl && sed -i 's:^CXXFLAGS=*:CXXFLAGS=-Wall -O0 -g :g' Makefile && grep ^CXXFLAGS= Makefile
+	cd libssl/openssl && sed -i 's:^CFLAGS=-fpic:CFLAGS=-Wall -O0 -g:g' Makefile && grep ^CFLAGS= Makefile
+	cd libssl/openssl && sed -i 's:^CXXFLAGS=-fpic:CXXFLAGS=-Wall -O0 -g:g' Makefile && grep ^CXXFLAGS= Makefile
 	cd libssl/openssl && perl configdata.pm --dump
 	cd libssl/openssl && ln -s . lib # curl wants this path
 
