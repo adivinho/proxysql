@@ -18,8 +18,7 @@ IS_CENTOS = $(if $(findstring Unknown, $(CENTOSVER)),false,true)
 #
 USEVALGRIND := $(shell echo $(USEVALGRIND))
 
-#PROXYDEBUG := $(shell echo $(PROXYDEBUG))
-PROXYDEBUG := 1
+PROXYDEBUG := $(shell echo $(PROXYDEBUG))
 ifeq ($(PROXYDEBUG),1)
 MYCFLAGS=-O0
 MYJEOPT=--enable-xmalloc --enable-prof --enable-fill --enable-debug
@@ -93,7 +92,7 @@ libssl/openssl/libssl.a:
 #	cd libssl/openssl && patch crypto/ec/curve448/curve448.c < ../curve448.c-multiplication-overflow.patch
 #	cd libssl/openssl && patch crypto/asn1/a_time.c < ../a_time.c-multiplication-overflow.patch
 	cd libssl/openssl && sed -i 's:^$$config{build_type} = "release":$$config{build_type} = "debug":g' ./Configure && grep build_type Configure
-	cd libssl/openssl && ./config no-ssl3 no-tests
+	cd libssl/openssl && ./config -d no-ssl3 no-tests
 	cd libssl/openssl && CC=${CC} CXX=${CXX} ${MAKE}
 	cd libssl/openssl && ln -s . lib # curl wants this path
 
