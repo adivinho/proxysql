@@ -94,6 +94,8 @@ libssl/openssl/libssl.a:
 	cd libssl/openssl && sed -i 's:^$$config{build_type} = "release":$$config{build_type} = "debug":g' ./Configure && grep build_type Configure
 	cd libssl/openssl && ./config -t
 	cd libssl/openssl && ./config -d no-ssl3 no-tests
+	cd libssl/openssl && echo "--------------" && cat Makefile && echo "------------------"
+	cd libssl/openssl && perl configdata.pm --dump
 	cd libssl/openssl && CFLAGS="-O0 -g ${CFLAGS}" && CC=${CC} CXX=${CXX} ${MAKE}
 	cd libssl/openssl && ln -s . lib # curl wants this path
 
