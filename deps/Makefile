@@ -96,6 +96,7 @@ libssl/openssl/libssl.a:
 	cd libssl/openssl && sed -i 's:^CFLAGS=-fpic:CFLAGS=-Wall -O0 -g:g' Makefile && grep ^CFLAGS= Makefile
 	cd libssl/openssl && sed -i 's:^CXXFLAGS=-fpic:CXXFLAGS=-Wall -O0 -g:g' Makefile && grep ^CXXFLAGS= Makefile
 	cd libssl/openssl && perl configdata.pm --dump
+	cd libssl/openssl && CC=${CC} CXX=${CXX} ${MAKE}
 	cd libssl/openssl && ln -s . lib # curl wants this path
 
 libssl: libssl/openssl/libssl.a
